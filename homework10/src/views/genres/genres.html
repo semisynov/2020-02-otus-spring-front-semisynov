@@ -1,0 +1,13 @@
+<div class="container-fluid">
+    <div class="card mt-3">
+        <div class="card-header h5"><b>Жанры</b></div>
+        <div class="card-body">
+            <grid :gridLoader="gridLoader" :columns="gridColumns" v-slot:table_content>
+                <tr v-for="e in gridLoader.gridData">
+                    <td>{{e.id}}</td>
+                    <td>{{e.title}}</td>
+                </tr>
+            </grid>
+        </div>
+    </div>
+</div>
