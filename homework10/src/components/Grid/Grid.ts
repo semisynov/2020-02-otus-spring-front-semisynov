@@ -1,6 +1,6 @@
-import { Component, Prop, Vue } from "vue-property-decorator";
+import {Component, Prop, Vue} from "vue-property-decorator";
 import GridLoader from "@/components/Grid/GridLoader";
-import { GridColumn } from "@/components/Grid/model/GridColumn";
+import {GridColumn} from "@/components/Grid/model/GridColumn";
 import NotificationUtil from "@/utils/NotificationUtil";
 
 @Component

@@ -1,8 +1,8 @@
-import { Component, Vue } from "vue-property-decorator";
+import {Component, Vue} from "vue-property-decorator";
 import Grid from "@/components/Grid/Grid.vue";
 import GridLoader from "@/components/Grid/GridLoader";
-import { GridColumn } from "@/components/Grid/model/GridColumn";
-import { Author } from "@/model/Author";
+import {GridColumn} from "@/components/Grid/model/GridColumn";
+import {Author} from "@/model/Author";
 
 @Component({components: {grid: Grid}})
 export default class Authors extends Vue {

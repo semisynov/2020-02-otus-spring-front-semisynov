@@ -1,10 +1,17 @@
 <div class="container-fluid">
+    <div class="row justify-content-xl-left">
+        <div class="col-xl-auto">
+            <button type="button" @click="createGenre()" class="btn btn-primary">
+                Создать
+            </button>
+        </div>
+    </div>
     <div class="card mt-3">
         <div class="card-header h5"><b>Жанры</b></div>
         <div class="card-body">
             <grid :gridLoader="gridLoader" :columns="gridColumns" v-slot:table_content>
                 <tr v-for="e in gridLoader.gridData">
-                    <td>{{e.id}}</td>
+                    <td><a :href="'#/genre/' + e.id">{{e.id}}</a></td>
                     <td>{{e.title}}</td>
                 </tr>
             </grid>

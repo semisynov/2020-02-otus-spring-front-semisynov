@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Notification from "vue-notification";
 import store from "@/config/store";
 import Vuelidate from 'vuelidate'
+import DateTimeFormatter from "@/utils/DateTimeFormatter";
 
 axios.defaults.baseURL = process.env.VUE_APP_SERVER_URL;
 Vue.config.productionTip = false;
@@ -18,8 +19,10 @@ Vue.use(VueAxios, axios)
 Vue.use(BootstrapVue)
 Vue.use(Notification)
 
+Vue.filter("DateTimeFormatter", DateTimeFormatter.filter())
+
 new Vue({
-  store,
-  router,
-  render: h => h(App)
+    store,
+    router,
+    render: h => h(App)
 }).$mount("#app");

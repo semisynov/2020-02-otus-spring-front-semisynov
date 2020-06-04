@@ -1,13 +1,14 @@
-import { Component, Vue } from "vue-property-decorator";
-import { Author } from "@/model/Author";
+import {Component, Vue} from "vue-property-decorator";
+import {Author} from "@/model/Author";
 import NotificationUtil from "@/utils/NotificationUtil";
+import {BvEvent} from "bootstrap-vue";
 
 @Component
 export default class AuthorsEdit extends Vue {
     public author: Author = {} as Author;
 
     private created(): void {
-        if (!this.$route.params.authorId) {
+        if (!this.$route.params.authorId || this.$route.path == "/author/add") {
             return;
         }
         this.author.id = parseInt(this.$route.params.authorId);
@@ -25,9 +26,9 @@ export default class AuthorsEdit extends Vue {
     public saveAuthor(): void {
         this.$http.post("/author", this.author)
             .then(response => {
-                this.author = response.data;
-                NotificationUtil.success(this, "Автор успешно создан");
-                this.$router.push(`/author/${this.author.id}`);
+                    this.author = response.data;
+                    NotificationUtil.success(this, "Автор успешно создан");
+                    this.$router.push(`/author/${this.author.id}`);
                 }
             )
             .catch(error => NotificationUtil.error(this, error.response.data.message));
@@ -45,7 +46,8 @@ export default class AuthorsEdit extends Vue {
 
     public deleteAuthor(): void {
         this.$http.delete("/author/" + this.author.id)
-            .then(response => {
+            .then(() => {
+                    this.$router.push(`/author`);
                     NotificationUtil.success(this, "Автор успешно удалён");
                 }
             )

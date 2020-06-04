@@ -1,8 +1,8 @@
-import { Component, Vue } from "vue-property-decorator";
+import {Component, Vue} from "vue-property-decorator";
 import Grid from "@/components/Grid/Grid.vue";
 import GridLoader from "@/components/Grid/GridLoader";
-import { GridColumn } from "@/components/Grid/model/GridColumn";
-import { Genre } from "@/model/Genre";
+import {GridColumn} from "@/components/Grid/model/GridColumn";
+import {Genre} from "@/model/Genre";
 
 @Component({components: {grid: Grid}})
 export default class Genres extends Vue {
@@ -11,4 +11,8 @@ export default class Genres extends Vue {
         {name: "#"},
         {name: "Наименование"}
     ];
+
+    private createGenre(): void {
+        this.$router.push(`/genre/add`);
+    }
 }

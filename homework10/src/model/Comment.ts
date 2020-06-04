@@ -1,4 +1,4 @@
-export interface Comment {
+export interface BookComment {
     id: number;
     dateTime: Date;
     text: string;
