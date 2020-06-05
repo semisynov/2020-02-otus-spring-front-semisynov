@@ -4,9 +4,6 @@ import {Book} from "@/model/Book";
 import {Author} from "@/model/Author";
 import {Genre} from "@/model/Genre";
 import {BvEvent} from "bootstrap-vue";
-import GridLoader from "@/components/Grid/GridLoader";
-import {BookComment} from "@/model/Comment";
-import {GridColumn} from "@/components/Grid/model/GridColumn";
 
 @Component
 export default class BookEdit extends Vue {
@@ -103,7 +100,9 @@ export default class BookEdit extends Vue {
             const formData = new FormData();
             formData.append("text", this.textComment);
             this.$http.post("/book/" + this.book.id + "/comment", formData)
-                .then(() => {
+                .then(response => {
+                        this.book = response.data;
+                        this.textComment = null;
                         NotificationUtil.success(this, "Комментарий успешно сохранён");
                         this.$router.push(`/book/${this.book.id}`);
                     }
