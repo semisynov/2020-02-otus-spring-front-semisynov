@@ -1,0 +1,117 @@
+<div class="container-fluid">
+    <div class="row justify-content-xl-left" v-if="book.id">
+        <div class="col-xl-auto">
+            <button v-b-modal.modal-comment class="btn btn-primary">
+                Новый комментарий
+            </button>
+        </div>
+    </div>
+
+    <div class="card mt-3">
+        <div class="card-header" v-if="book.id"><b>Книга #{{book.id}}</b></div>
+        <div class="card-header" v-if="!book.id"><b>Новая книга</b></div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-xl-6">
+                    <div class="card mt-2">
+                        <div class="card-body">
+                            <div class="form-group text-left" v-if="book.id">
+                                <label for="bookId">
+                                    ID:
+                                </label>
+                                <input type="text" class="form-control" id="bookId" v-model="book.id" readonly>
+                            </div>
+                            <div class="form-group text-left">
+                                <label for="bookTitle">
+                                    Название:
+                                </label>
+                                <input type="text" class="form-control" id="bookTitle" v-model="book.title">
+                            </div>
+                            <div class="form-group text-left">
+                                <label for="authorsSelect">
+                                    Авторы:
+                                </label>
+                                <select class="custom-select" id="authorsSelect" name="authors" size="5"
+                                        multiple="multiple" v-model="selectedAuthor">
+                                    <option v-for="a in allAuthors" :value="a">
+                                        {{a.name}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group text-left">
+                                <label for="genresSelect">
+                                    Жанры:
+                                </label>
+                                <select class="custom-select" id="genresSelect" name="genres" size="5"
+                                        multiple="multiple" v-model="selectedGenre">
+                                    <option v-for="g in allGenres" :value="g">
+                                        {{g.title}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mt-2">
+                        <div class="card-body">
+                            <div class="row justify-content-xl-center">
+                                <div class="col-xl-auto" v-if="!book.id">
+                                    <button type="button" @click="saveBook()" class="btn btn-primary">
+                                        Сохранить
+                                    </button>
+                                </div>
+                                <div class="col-xl-auto" v-if="book.id > 0">
+                                    <button type="button" @click="updateBook()" class="btn btn-primary">
+                                        Сохранить
+                                    </button>
+                                    <button type="button" @click="deleteBook()" class="btn btn-danger">
+                                        Удалить
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="card mt-2" v-if="book.comments">
+                        <div class="card-header h5"><b>Комментарии</b></div>
+                        <div class="card-body">
+                            <table class="table table-sm">
+                                <thead>
+                                <tr>
+                                    <th>Дата</th>
+                                    <th>Текст</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr v-for="c in book.comments">
+                                    <td>{{c.dateTime | DateTimeFormatter}}</td>
+                                    <td>{{c.text}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <b-modal id="modal-comment" ref="modal-comment" title="Комментарий" @ok="handleOk">
+                <div class="b-block text-center">
+                    <div class="form-group text-left">
+                        <label for="commentText"><b>Комментарий</b></label>
+                        <input type="text" class="form-control" id="commentText" v-model="textComment">
+                    </div>
+
+                </div>
+                <template v-slot:modal-footer="{ ok, cancel }">
+                    <b-button size="sm" variant="danger" @click="cancel()">
+                        Отменить
+                    </b-button>
+                    <b-button size="sm" variant="success" @click="ok()">
+                        Сохранить
+                    </b-button>
+                </template>
+            </b-modal>
+        </div>
+    </div>
+</div>
