@@ -37,7 +37,7 @@ export default class AuthorsEdit extends Vue {
         this.$http.put("/author/" + this.author.id, this.author)
             .then(response => {
                     this.author = response.data;
-                    NotificationUtil.success(this, "Автор успешно сохранен");
+                    NotificationUtil.success(this, "Автор успешно сохранён");
                 }
             )
             .catch(error => NotificationUtil.error(this, error.response.data.message));
