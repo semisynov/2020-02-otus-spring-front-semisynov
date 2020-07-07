@@ -1,0 +1,20 @@
+<div class="container-fluid">
+    <div class="row justify-content-xl-left">
+        <div class="col-xl-auto">
+            <button type="button" @click="createAuthor()" class="btn btn-primary">
+                Создать
+            </button>
+        </div>
+    </div>
+    <div class="card mt-3">
+        <div class="card-header h5"><b>Авторы</b></div>
+        <div class="card-body">
+            <grid :gridLoader="gridLoader" :columns="gridColumns" v-slot:table_content>
+                <tr v-for="e in gridLoader.gridData">
+                    <td><a :href="'#/author/' + e.id">{{e.id}}</a></td>
+                    <td>{{e.name}}</td>
+                </tr>
+            </grid>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <table v-if="gridLoader.gridData" class="table table-sm">
+            <thead>
+            <tr>
+                <th v-for="column in columns">
+                    <span>{{column.name}}</span>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <slot name="table_content"></slot>
+            </tbody>
+        </table>
+    </div>
+</div>
